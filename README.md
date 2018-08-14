@@ -14,6 +14,6 @@ Analog:
 * A0 - Water Sensor (S)
 
 Digital:
-* Pin7 - Relay (S)
+* Pin7 - Relay Swtich (S)
 
 Enjoy!
