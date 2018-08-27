@@ -35,8 +35,10 @@ void setup() {
 void loop() {
   // read the analog in value:
   int waterLevel = analogRead(analogInPin);
-
-  if (waterLevel > 300){
+  Serial.print("Current water level is: ");
+  Serial.println(waterLevel);
+  
+  if (waterLevel > 600){
     Serial.print("Pump On\n");
     digitalWrite(7, HIGH);
 
@@ -44,29 +46,34 @@ void loop() {
     int pumpTrack = 0;
     while(pumpTrack < pumpTime){
       delay(1000);
-      Serial.print("Pump Timer ");
-      Serial.println(pumpTrack);
+      //Serial.print("Pump Timer ");
+      //Serial.println(pumpTrack);
 
       // Keep the pump running if the water is still detected
       int waterCheck2 = analogRead(analogInPin);
-      if (waterCheck2 < 300){
-        pumpTrack++;
-       }
-
+      Serial.print("Water Check 2 is ");
+      Serial.println(waterCheck2);
+      if (waterCheck2 < 200){
+         break;
+      }
+      pumpTrack++;
+      
     } //end while   
     
     digitalWrite(7, LOW);
     Serial.print("Pump Off\n");
-  }
-  else{
-    Serial.print("Minute Check Complete\n");
-  }
+    } //End Level check
+  //else{
+    //Serial.print("Minute Check Complete\n");
+  //}
 
   int loopTrack = 0;
+  Serial.println("Sleeping for 1 Min");
   while(loopTrack < loopDelaySec){
-    delay(1000); //delay 1 second
-    Serial.print("Loop Delay ");
-    Serial.println(loopTrack);
+    //delay(1000); //delay 1 second
+    delay(10);
+    //Serial.print("Loop Delay ");
+    //Serial.println(loopTrack);
     loopTrack++;
   }
 }
